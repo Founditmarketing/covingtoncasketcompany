@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Covington Casket Company, established 1924">
+  <rect width="64" height="64" rx="12" fill="#152239"/>
+  <circle cx="32" cy="32" r="24" fill="none" stroke="#b1a17c" stroke-width="3"/>
+  <text x="32" y="29" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="11" font-weight="bold" fill="#b1a17c">EST.</text>
+  <text x="32" y="44" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="15" font-weight="bold" letter-spacing="-0.5" fill="#b1a17c">1924</text>
+</svg>
