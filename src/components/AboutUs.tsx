@@ -20,7 +20,7 @@ export default function AboutUs() {
       {/* Tan texture + slight white overlay to keep it light and readable */}
       <div className="absolute inset-0 bg-white/60 pointer-events-none" />
 
-      <div className="max-w-[96rem] mx-auto px-4 lg:px-8 flex flex-col lg:flex-row items-center gap-12 relative z-10">
+      <div className="max-w-[96rem] mx-auto px-8 lg:px-8 flex flex-col lg:flex-row items-center gap-12 relative z-10">
 
         {/* Left: Video Spotlight */}
         <div className="w-full lg:w-7/12 relative group z-10">

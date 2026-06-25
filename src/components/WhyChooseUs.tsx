@@ -10,7 +10,7 @@ export default function WhyChooseUs() {
       {/* Tan texture + slight white overlay to keep it light and readable */}
       <div className="absolute inset-0 bg-white/60 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row gap-16 items-center relative z-10">
+      <div className="max-w-7xl mx-auto px-8 lg:px-4 flex flex-col lg:flex-row gap-16 items-center relative z-10">
 
         {/* Left: Text Content */}
         <div className="w-full lg:w-1/2">

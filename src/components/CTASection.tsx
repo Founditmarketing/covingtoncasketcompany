@@ -9,7 +9,7 @@ export default function CTASection() {
       {/* Consistent dark overlay — uniform color all around */}
       <div className="absolute inset-0 bg-[#152239]/85" />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
+      <div className="relative z-10 max-w-4xl mx-auto px-8 lg:px-4 text-center text-white">
         <h2 className="text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight font-light drop-shadow-md">
           Have an Immediate Need?
         </h2>

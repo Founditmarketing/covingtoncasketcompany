@@ -27,7 +27,7 @@ const caskets = [
 ];
 
 const N = caskets.length;
-const SLOT = 82;                  // % of full viewport width per card slot
+const SLOT = 62;                  // % of full viewport width per card slot
 const OFFSET = (100 - SLOT) / 2;  // centers the active card -> symmetric peek
 
 export default function CasketShowcase() {
@@ -112,18 +112,18 @@ export default function CasketShowcase() {
             <div key={i} className="shrink-0 px-3" style={{ width: `${SLOT}%` }}>
               <div className="card-frame relative bg-[#152239] rounded-sm overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)] h-[440px] md:h-[560px] flex flex-col">
                 {/* Casket — fully visible, no overlay */}
-                <div className="flex-1 min-h-0 relative flex items-center justify-center p-6">
+                <div className="flex-1 min-h-0 relative flex items-center justify-center p-2">
                   <img
                     src={c.image}
                     alt={`Covington ${c.name} casket`}
                     loading="lazy"
                     decoding="async"
                     draggable={false}
-                    className="max-h-full w-auto object-contain drop-shadow-2xl"
+                    className="max-h-full max-w-full w-auto object-contain drop-shadow-2xl"
                   />
                 </div>
                 {/* Caption */}
-                <div className="px-8 pb-8 pt-3 border-t border-white/10">
+                <div className="px-6 pb-6 pt-3 border-t border-white/10">
                   <span className="text-[#b1a17c] font-sans uppercase tracking-[0.3em] text-[9px] flex items-center gap-2 mb-2">
                     <span className="h-px w-5 bg-[#b1a17c]" /> {c.tagline}
                   </span>

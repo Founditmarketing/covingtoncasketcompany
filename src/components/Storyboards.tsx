@@ -3,7 +3,7 @@ import { Paintbrush } from 'lucide-react';
 
 export default function Storyboards() {
   return (
-    <section className="pt-24 pb-10 bg-[#0d1625] text-white relative overflow-hidden font-serif border-t border-white/5">
+    <section className="pt-24 pb-10 md:pb-28 bg-[#0d1625] text-white relative overflow-hidden font-serif border-t border-white/5">
 
       {/* Abstract dark texture */}
       <div className="absolute inset-0 bg-gradient-to-tr from-[#152239] via-[#0d1625] to-[#1c2c48] opacity-80 mix-blend-overlay" />
