@@ -1,30 +1,23 @@
 import { MoveRight } from 'lucide-react';
-import craftsmanPolaroid from '../assets/images/craftsman_polaroid_1782308629040.jpg';
 
 interface PageProps {
   navigate: (to: string, section?: string) => void;
 }
 
-const timeline = [
-  { year: '1924', text: 'Our story begins. The original casket operation is founded, hand-building cloth-covered wood caskets delivered by rail.' },
-  { year: '1945', text: 'The company merges with a neighboring factory in Opp, Alabama and incorporates as Covington Casket Company.' },
-  { year: '1959', text: 'Metal casket manufacturing begins, broadening the collection for the families we serve.' },
-  { year: '1971', text: 'Johnny Williamson — a Lance snack-route salesman — joins the company, acquiring half ownership within six years.' },
-  { year: '1978 – 1987', text: 'Johnny’s sons Eddie and Alan join the business, carrying the family into a second generation.' },
-  { year: '2020', text: 'Alan relocates to a new Industrial Park facility, more than doubles production, and launches Covington Storyboards nationwide.' },
-];
-
-const leadership = [
-  { name: 'Alan Williamson', role: 'Owner, President & CEO' },
-  { name: 'Paula Williamson', role: 'Ownership & Operations' },
-  { name: 'Andrew Williamson', role: 'Sales — Third Generation' },
+const story = [
+  'The era of modern-day Covington Casket Company begins in an unlikely way — with a pack of Lance crackers. Johnny Williamson was a Lance route salesman. Back in the early 1970s, he sold cookies and crackers to local store owners. One of his stops was a casket company on North Cotton Street in his hometown of Andalusia, Alabama — a casket maker that began operations in 1924, having combined with a similar factory in Opp, just 20 minutes to the east.',
+  'The men running the company took great interest in the salesmanship of the local Lance route salesman and ultimately hired him in 1971. Just six short years later, he acquired 50% of the company. Originally named Andalusia Casket Company, the business was incorporated in 1945 and renamed Covington Casket Company.',
+  'Covington began like most casket companies of the day, manufacturing cloth-covered woods that were packed in wooden boxes and shipped throughout the Southeast by rail. In 1959, Covington began manufacturing metal caskets. Mr. Williamson’s son Eddie joined in 1978, and his younger son Alan — now President and CEO — joined in 1987. Later that year, Johnny Williamson acquired the balance of the stock, becoming sole owner.',
+  'In December of 1993, Mr. Williamson lost his battle with cancer and the brothers took over as owners. Later, Alan bought his brother’s shares. Today, Alan and his wife, Paula, own Covington Casket. Their son, Andrew — the third generation of the family — is an integral part of operations, regularly on the road meeting with funeral directors. Alan himself still enjoys making deliveries and talking with customers, pretty much unheard of for a CEO these days.',
+  'In 2020, working with the City of Andalusia, Alan exchanged the historic North Cotton Street location for a massive building in Andalusia’s Industrial Park — adding state-of-the-art production lines, a beautiful new showroom, spacious warehouse facilities, and enjoyable space for employees.',
+  'Production has more than doubled, and new funeral homes join the Covington network routinely. An entirely new product line — Covington Storyboards — is now in production and available nationwide. That red-topped jar with the blue “Lance” lettering still sits prominently in Covington’s Heritage Room. Alan and his team welcome you to stop by, take a tour — and grab a pack of Lance crackers.',
 ];
 
 export default function AboutPage({ navigate }: PageProps) {
   return (
     <div className="bg-[#152239] text-white font-serif">
 
-      {/* Page hero */}
+      {/* Hero */}
       <section className="relative overflow-hidden py-24 lg:py-28 text-center">
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#b1a17c 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
         <div className="relative z-10 max-w-3xl mx-auto px-6">
@@ -33,95 +26,92 @@ export default function AboutPage({ navigate }: PageProps) {
           </span>
           <h1 className="text-5xl md:text-6xl font-light leading-tight mb-6">The Covington Story</h1>
           <p className="font-sans text-white/70 text-base md:text-lg leading-relaxed">
-            A family-owned manufacturer proudly serving funeral homes across the Southeast since 1924 — now in our third generation.
+            Family owned since 1924 — now in our third generation, proudly serving funeral homes across the Southeast.
           </p>
         </div>
       </section>
 
-      {/* Intro + image */}
-      <section className="heritage-bg text-[#152239] py-20 lg:py-28">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-14 items-center">
-          <div className="card-frame relative p-3 bg-white border border-[#152239]/10 order-2 lg:order-1">
-            <img src={craftsmanPolaroid} alt="A Covington craftsman at work" loading="lazy" decoding="async" className="w-full h-auto sepia-[.25] contrast-110" />
+      {/* Welcome + owner portrait */}
+      <section className="heritage-bg text-[#152239] py-20 lg:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="card-frame relative p-2 bg-white border border-[#152239]/10 order-2 lg:order-1">
+            <img src="/about/alan-williamson.png" alt="Alan A. Williamson, owner of Covington Casket" loading="lazy" decoding="async" className="w-full h-auto" />
           </div>
           <div className="order-1 lg:order-2">
             <span className="text-[#b1a17c] font-sans uppercase tracking-[0.4em] text-[10px] mb-4 flex items-center gap-2">
               <span className="h-px w-6 bg-[#b1a17c]" /> Thank You for Visiting
             </span>
-            <h2 className="text-3xl md:text-4xl font-light mb-6">Three Generations of Hometown Craftsmanship</h2>
+            <h2 className="text-3xl md:text-4xl font-light mb-6">A Hometown Legacy</h2>
             <p className="font-sans text-[#152239]/75 text-sm md:text-base leading-relaxed mb-5">
-              We are honored to have served families across the Southeast since 1924. Behind every casket are real hometown people — many who have known profound loss personally — who hand-assemble each order with care.
+              It is an honor to have you visit us. Since 1924, families across the Southeast have made us a part of their story. We are only able to do what we do because of professional, compassionate funeral directors who believe in Covington Casket — and the third generation of our Williamson family is now serving current, and often third-generation, funeral directors.
             </p>
-            <p className="font-sans text-[#152239]/75 text-sm md:text-base leading-relaxed">
-              Today, three generations of the Williamson family are involved in the business, continuing a legacy built on quality, integrity, and service to the funeral directors and families who count on us.
-            </p>
+            <blockquote className="font-serif italic text-[#b1a17c] text-xl md:text-2xl leading-snug mb-2">
+              “To think — it all started with a pack of Lance crackers.”
+            </blockquote>
+            <p className="font-sans text-[#152239]/55 text-xs uppercase tracking-widest">— Alan A. Williamson, Owner</p>
           </div>
         </div>
       </section>
 
-      {/* Pull quote */}
-      <section className="bg-[#0d1625] py-20 border-y border-[#b1a17c]/15 text-center">
-        <div className="max-w-3xl mx-auto px-6">
-          <p className="font-serif italic text-[#b1a17c] text-2xl md:text-3xl leading-snug">
-            &ldquo;To think — it all started with a pack of Lance crackers.&rdquo;
-          </p>
-        </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="bg-[#152239] py-20 lg:py-28">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-14">
+      {/* The Covington Story */}
+      <section className="bg-[#152239] py-20 lg:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-10">
             <span className="text-[#b1a17c] font-sans uppercase tracking-[0.4em] text-[10px] mb-4 flex items-center justify-center gap-3">
-              <span className="h-px w-8 bg-[#b1a17c]/60" /> A Century of Service <span className="h-px w-8 bg-[#b1a17c]/60" />
+              <span className="h-px w-8 bg-[#b1a17c]/60" /> Since 1924 <span className="h-px w-8 bg-[#b1a17c]/60" />
             </span>
-            <h2 className="text-4xl md:text-5xl font-light">Our Journey</h2>
+            <h2 className="text-4xl md:text-5xl font-light">The Condensed Version</h2>
           </div>
-          <div className="space-y-8">
-            {timeline.map((t) => (
-              <div key={t.year} className="flex gap-6 items-start border-b border-white/10 pb-8 last:border-0">
-                <div className="shrink-0 w-28 md:w-36 text-[#b1a17c] font-serif text-xl md:text-2xl">{t.year}</div>
-                <p className="font-sans text-white/70 text-sm md:text-base leading-relaxed">{t.text}</p>
-              </div>
-            ))}
+
+          <div className="card-frame relative p-2 bg-white/5 border border-white/10 mb-10">
+            <img src="/about/factory.jpg" alt="The original Covington Casket factory on North Cotton Street" loading="lazy" decoding="async" className="w-full h-auto" />
+          </div>
+
+          <div className="space-y-5 font-sans text-white/75 text-sm md:text-base leading-relaxed">
+            {story.map((p, i) => <p key={i}>{p}</p>)}
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 mt-10">
+            <div className="card-frame relative p-2 bg-white/5 border border-white/10">
+              <img src="/about/lance-crackers.jpg" alt="The Lance crackers jar in Covington’s Heritage Room" loading="lazy" decoding="async" className="w-full h-44 md:h-56 object-cover" />
+            </div>
+            <div className="card-frame relative p-2 bg-white/5 border border-white/10">
+              <img src="/about/heritage-room.png" alt="Covington Casket Heritage Room" loading="lazy" decoding="async" className="w-full h-44 md:h-56 object-cover" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Leadership */}
+      {/* Service area + map */}
       <section className="heritage-bg text-[#152239] py-20 lg:py-24">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8 text-center">
-          <span className="text-[#b1a17c] font-sans uppercase tracking-[0.4em] text-[10px] mb-4 flex items-center justify-center gap-3">
-            <span className="h-px w-8 bg-[#b1a17c]/60" /> Family Leadership <span className="h-px w-8 bg-[#b1a17c]/60" />
-          </span>
-          <h2 className="text-4xl md:text-5xl font-light mb-12">The Williamson Family</h2>
-          <div className="grid sm:grid-cols-3 gap-8">
-            {leadership.map((p) => (
-              <div key={p.name} className="flex flex-col items-center">
-                <span className="w-3 h-3 rotate-45 bg-[#b1a17c] mb-5" aria-hidden="true" />
-                <h3 className="text-xl md:text-2xl font-light mb-1">{p.name}</h3>
-                <p className="font-sans text-[#152239]/60 text-xs uppercase tracking-widest">{p.role}</p>
-              </div>
-            ))}
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div>
+            <span className="text-[#b1a17c] font-sans uppercase tracking-[0.4em] text-[10px] mb-4 flex items-center gap-2">
+              <span className="h-px w-6 bg-[#b1a17c]" /> Our Service Area
+            </span>
+            <h2 className="text-3xl md:text-4xl font-light mb-6">Rooted in Andalusia, Alabama</h2>
+            <p className="font-sans text-[#152239]/75 text-sm md:text-base leading-relaxed">
+              Andalusia is about an hour and a half south of Montgomery and roughly 30 minutes from the Florida panhandle line. In addition to our massive corporate warehouse, we operate distribution centers in Mississippi, Louisiana, Georgia, and North Alabama.
+            </p>
+          </div>
+          <div className="card-frame relative p-2 bg-white border border-[#152239]/10">
+            <img src="/about/service-area-map.png" alt="Covington Casket service area across the Southeast" loading="lazy" decoding="async" className="w-full h-auto" />
           </div>
         </div>
       </section>
 
-      {/* Service area + CTA */}
+      {/* CTA */}
       <section className="bg-[#d21243] py-20 lg:py-24 text-center text-white">
         <div className="max-w-3xl mx-auto px-6">
-          <span className="text-white/90 font-sans uppercase tracking-[0.4em] text-[10px] mb-4 flex items-center justify-center gap-3">
-            <span className="h-px w-8 bg-white/50" /> Our Service Area <span className="h-px w-8 bg-white/50" />
-          </span>
-          <h2 className="text-3xl md:text-4xl font-light mb-6">Rooted in Andalusia, Alabama</h2>
+          <h2 className="text-3xl md:text-4xl font-light mb-6">Become a Covington Partner</h2>
           <p className="font-sans text-white/80 text-sm md:text-base leading-relaxed mb-10">
-            From our facility in Andalusia — about 90 minutes south of Montgomery and 30 minutes from the Florida panhandle — and distribution centers across Mississippi, Louisiana, Georgia, and North Alabama, we proudly serve more than 280 funeral homes throughout the Southeast.
+            We’d be honored to serve your funeral home. Reach out and we’ll tell you more about joining the Covington network.
           </p>
           <button
             onClick={() => navigate('/contact')}
             className="btn-swipe group inline-flex items-center gap-3 bg-white text-[#152239] [--btn-swipe:#b1a17c] [--corner:#152239] px-8 py-4 text-xs uppercase"
           >
-            Become a Covington Partner <MoveRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            Contact Us <MoveRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
         </div>
       </section>
