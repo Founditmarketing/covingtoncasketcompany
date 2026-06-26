@@ -36,8 +36,8 @@ export default function App() {
 
   useEffect(() => {
     if (phase === 'done') return;
-    const t1 = window.setTimeout(() => setPhase('reveal'), 3400); // load screen fades, revealing the hero background
-    const t2 = window.setTimeout(() => setPhase('done'), 4600); // then content fades & slides in
+    const t1 = window.setTimeout(() => setPhase('reveal'), 2400); // load screen fades, revealing the hero background
+    const t2 = window.setTimeout(() => setPhase('done'), 3600); // then content fades & slides in
     return () => {
       window.clearTimeout(t1);
       window.clearTimeout(t2);
