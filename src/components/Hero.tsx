@@ -36,7 +36,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-[2] opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#b1a17c 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
 
       {/* Left: Content */}
-      <div className="w-full md:w-1/2 px-6 lg:pl-24 lg:pr-6 py-12 flex flex-col justify-center relative z-20">
+      <div className="w-full md:w-1/2 lg:w-[60%] px-6 lg:pl-16 lg:pr-6 py-12 flex flex-col justify-center relative z-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -45,9 +45,8 @@ export default function Hero() {
           <span className="text-[#b1a17c] font-sans uppercase tracking-[0.4em] text-[10px] mb-6 flex items-center gap-2">
             <span className="h-px w-8 bg-[#b1a17c]" /> Family Owned Artistry
           </span>
-          <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-light leading-[1.1] mb-8 drop-shadow-2xl">
-            Honor their <span className="italic">unique</span> legacy. <br />
-            <span className="text-[#b1a17c]">Ask for Covington.</span>
+          <h1 className="text-4xl sm:text-5xl lg:text-[3.75rem] font-light leading-[1.1] mb-8 drop-shadow-2xl">
+            Honor their legacy. <span className="text-[#b1a17c]">Ask for Covington.</span>
           </h1>
           <p className="text-white/70 text-sm md:text-base max-w-lg leading-relaxed mb-10 font-sans">
             Custom, world-class caskets and artistic, pictorial Storyboards that help you tell your loved one's story. We manufacture and serve premiere funeral homes across the Southeast.
@@ -64,7 +63,7 @@ export default function Hero() {
       </div>
 
       {/* Right: Oversized casket bleeding off the right edge + working color switcher */}
-      <div className="w-full md:w-1/2 relative flex flex-col">
+      <div className="w-full md:w-1/2 lg:w-[40%] relative flex flex-col">
         {/* Decorative radial glow behind the casket */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 md:w-[30rem] md:h-[30rem] bg-[#1c2c48] rounded-full blur-3xl opacity-60 pointer-events-none" />
 
