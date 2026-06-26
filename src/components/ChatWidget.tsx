@@ -52,7 +52,7 @@ export default function ChatWidget({ hidden = false }: { hidden?: boolean }) {
         <div className="p-5 border-b border-white/5">
           <a
             href={PHONE_HREF}
-            className="btn-swipe flex items-center justify-center gap-3 bg-[#d21243] text-white [--btn-swipe:#152239] font-bold uppercase tracking-widest text-sm py-4 rounded-sm shadow-[0_0_20px_rgba(210,18,67,0.4)]"
+            className="btn-swipe flex items-center justify-center gap-3 bg-[#d21243] text-white [--btn-swipe:#152239] font-bold uppercase tracking-widest text-sm py-4 rounded-sm"
           >
             <Phone className="w-5 h-5" />
             Call Now
@@ -97,7 +97,7 @@ export default function ChatWidget({ hidden = false }: { hidden?: boolean }) {
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? 'Close contact window' : 'Open contact window'}
         aria-expanded={open}
-        className="w-14 h-14 bg-[#d21243] shadow-[0_0_20px_rgba(210,18,67,0.5)] flex items-center justify-center rounded-sm border border-white/20 hover:scale-105 transition-transform shrink-0"
+        className="w-14 h-14 bg-[#d21243] flex items-center justify-center rounded-sm border border-white/20 hover:scale-105 transition-transform shrink-0"
       >
         {open ? <X className="w-6 h-6 text-white" /> : <MessageCircle className="w-6 h-6 text-white" />}
       </button>

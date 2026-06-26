@@ -36,7 +36,10 @@ export default function CasketShowcase() {
   // % of viewport per card slot: near-full on mobile (focused, tiny peek), wider peek on desktop.
   const [slot, setSlot] = useState(62);
   const animating = useRef(false);
-  const dragX = useRef<number | null>(null);
+  const start = useRef<{ x: number; y: number } | null>(null);
+  const dragging = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [dragPct, setDragPct] = useState(0);
   const active = ((pos % N) + N) % N;
   const offset = (100 - slot) / 2; // centers the active card -> symmetric peek
 
@@ -72,13 +75,47 @@ export default function CasketShowcase() {
     animating.current = false;
   };
 
-  const onPointerDown = (e: ReactPointerEvent) => { dragX.current = e.clientX; };
-  const onPointerUp = (e: ReactPointerEvent) => {
-    if (dragX.current == null) return;
-    const dx = e.clientX - dragX.current;
-    dragX.current = null;
-    if (dx < -50) move(1);
-    else if (dx > 50) move(-1);
+  // Finger-following drag. Axis detection lets vertical gestures still scroll
+  // the page while horizontal drags move the carousel.
+  const onPointerDown = (e: ReactPointerEvent) => {
+    if (animating.current) return;
+    start.current = { x: e.clientX, y: e.clientY };
+    dragging.current = false;
+  };
+  const onPointerMove = (e: ReactPointerEvent) => {
+    if (!start.current) return;
+    const dx = e.clientX - start.current.x;
+    const dy = e.clientY - start.current.y;
+    if (!dragging.current) {
+      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;     // below intent threshold
+      if (Math.abs(dy) > Math.abs(dx)) { start.current = null; return; } // vertical -> let page scroll
+      dragging.current = true;
+      setWithTransition(false);
+      e.currentTarget.setPointerCapture?.(e.pointerId);
+    }
+    const w = containerRef.current?.offsetWidth || window.innerWidth;
+    setDragPct((dx / w) * 100);
+  };
+  const endDrag = (e: ReactPointerEvent) => {
+    if (!start.current) return;
+    const dx = e.clientX - start.current.x;
+    const wasDragging = dragging.current;
+    start.current = null;
+    dragging.current = false;
+    setDragPct(0);
+    setWithTransition(true);
+    if (!wasDragging) return;
+    const w = containerRef.current?.offsetWidth || window.innerWidth;
+    const threshold = w * (slot / 100) * 0.18; // ~18% of a card advances
+    if (dx < -threshold) move(1);
+    else if (dx > threshold) move(-1);
+  };
+  const onPointerCancel = () => {
+    if (!start.current) return;
+    start.current = null;
+    dragging.current = false;
+    setDragPct(0);
+    setWithTransition(true);
   };
 
   return (
@@ -107,14 +144,17 @@ export default function CasketShowcase() {
       {/* Full-width peek carousel */}
       <div className="relative z-10 overflow-hidden">
         <div
-          className="flex select-none"
+          ref={containerRef}
+          className="flex select-none touch-pan-y cursor-grab active:cursor-grabbing"
           style={{
-            transform: `translateX(${-pos * slot + offset}%)`,
+            transform: `translateX(${-pos * slot + offset + dragPct}%)`,
             transition: withTransition ? 'transform 600ms cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
           }}
           onTransitionEnd={handleTransitionEnd}
           onPointerDown={onPointerDown}
-          onPointerUp={onPointerUp}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={onPointerCancel}
         >
           {items.map((c, i) => (
             <div key={i} className="shrink-0 px-2 md:px-3" style={{ width: `${slot}%` }}>

@@ -38,7 +38,7 @@ export default function Storyboards() {
               Beloved Landscapes & Hobbies
             </li>
           </ul>
-          <button className="btn-swipe bg-[#d21243] text-white [--btn-swipe:#152239] font-sans font-bold px-8 py-4 uppercase tracking-widest text-xs rounded-sm shadow-[0_0_20px_rgba(210,18,67,0.35)]">
+          <button className="btn-swipe bg-[#d21243] text-white [--btn-swipe:#152239] font-sans font-bold px-8 py-4 uppercase tracking-widest text-xs rounded-sm">
             View Storyboard Gallery
           </button>
         </div>

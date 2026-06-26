@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 
 const caskets = [
@@ -9,11 +9,31 @@ const caskets = [
 
 export default function Hero() {
   const [selected, setSelected] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Slow the background video down a little for a calm, drifting feel.
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.playbackRate = 0.7;
+  }, []);
 
   return (
     <section className="relative w-full min-h-[calc(100vh-7rem)] flex flex-col md:flex-row bg-[#152239] overflow-hidden text-white font-serif">
+      {/* Background video */}
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+        src="/meadowbackground.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-hidden="true"
+        onLoadedMetadata={(e) => { e.currentTarget.playbackRate = 0.7; }}
+      />
+      {/* Blue overlay over the video */}
+      <div className="absolute inset-0 z-[1] bg-[#152239]/92 pointer-events-none" />
       {/* Abstract radial pattern overlay */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#b1a17c 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+      <div className="absolute inset-0 z-[2] opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#b1a17c 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
 
       {/* Left: Content */}
       <div className="w-full md:w-1/2 px-6 lg:pl-24 lg:pr-6 py-12 flex flex-col justify-center relative z-20">
@@ -33,7 +53,7 @@ export default function Hero() {
             Custom, world-class caskets and artistic, pictorial Storyboards that help you tell your loved one's story. We manufacture and serve premiere funeral homes across the Southeast.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="btn-swipe px-8 py-4 rounded-sm bg-[#d21243] text-white [--btn-swipe:#152239] text-xs font-bold font-sans uppercase tracking-widest flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(210,18,67,0.35)]">
+            <button className="btn-swipe px-8 py-4 rounded-sm bg-[#d21243] text-white [--btn-swipe:#152239] text-xs font-bold font-sans uppercase tracking-widest flex items-center justify-center gap-3">
               Discover Caskets <span className="text-white text-lg leading-none">→</span>
             </button>
             <button className="btn-swipe px-8 py-4 rounded-sm bg-[#152239] border border-[#b1a17c] text-white [--btn-swipe:#d21243] text-xs font-bold font-sans uppercase tracking-widest flex items-center justify-center gap-3">
@@ -57,7 +77,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 200 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, ease: 'easeOut' }}
-            className="absolute top-1/2 left-[8%] -translate-y-1/2 w-[128%] max-w-none object-contain drop-shadow-2xl pointer-events-none z-10"
+            className="absolute top-1/2 left-[8%] -translate-y-1/2 md:mt-12 w-[128%] max-w-none object-contain drop-shadow-2xl pointer-events-none z-10"
           />
         </div>
 
