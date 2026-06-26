@@ -29,6 +29,7 @@ interface HeaderProps {
 
 export default function Header({ menuOpen, setMenuOpen, navigate, route, onSearch }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
+  const [casketsOpen, setCasketsOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -40,6 +41,7 @@ export default function Header({ menuOpen, setMenuOpen, navigate, route, onSearc
   // Lock body scroll while the mobile slide-out menu is open.
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
+    if (!menuOpen) setCasketsOpen(false);
     return () => {
       document.body.style.overflow = '';
     };
@@ -198,17 +200,56 @@ export default function Header({ menuOpen, setMenuOpen, navigate, route, onSearc
 
         {/* Nav links */}
         <nav className="flex flex-col px-6 py-4 font-sans overflow-y-auto">
-          {navLinks.map(({ label, to, section }) => (
-            <a
-              key={label}
-              href={'#' + to}
-              onClick={(e) => { e.preventDefault(); navigate(to, section); }}
-              className="group flex items-center justify-between text-white hover:text-[#b1a17c] uppercase tracking-widest text-sm font-semibold py-3.5 border-b border-white/5 transition-colors"
-            >
-              {label}
-              <ChevronRight className="w-4 h-4 text-[#b1a17c]/40 group-hover:text-[#b1a17c] group-hover:translate-x-1 transition-all duration-300" />
-            </a>
-          ))}
+          {navLinks.map(({ label, to, section, dropdown }) => {
+            if (dropdown) {
+              return (
+                <div key={label} className="border-b border-white/5">
+                  <button
+                    onClick={() => setCasketsOpen((o) => !o)}
+                    aria-expanded={casketsOpen}
+                    className="w-full flex items-center justify-between text-white hover:text-[#b1a17c] uppercase tracking-widest text-sm font-semibold py-3.5 transition-colors"
+                  >
+                    {label}
+                    <ChevronDown className={`w-4 h-4 text-[#b1a17c]/60 transition-transform duration-300 ${casketsOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  <div className={`grid transition-[grid-template-rows] duration-300 ease-out ${casketsOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+                    <div className="overflow-hidden">
+                      <div className="flex flex-col pl-3 pb-1">
+                        {categories.map((c) => (
+                          <a
+                            key={c.slug}
+                            href={`#/caskets/${c.slug}`}
+                            onClick={(e) => { e.preventDefault(); navigate(`/caskets/${c.slug}`); }}
+                            className="text-white/65 hover:text-[#b1a17c] uppercase tracking-widest text-[11px] py-2.5 border-b border-white/5 transition-colors"
+                          >
+                            {c.name}
+                          </a>
+                        ))}
+                        <a
+                          href="#/caskets"
+                          onClick={(e) => { e.preventDefault(); navigate('/caskets'); }}
+                          className="text-[#b1a17c] uppercase tracking-widest text-[11px] py-2.5 transition-colors"
+                        >
+                          View All Caskets
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <a
+                key={label}
+                href={'#' + to}
+                onClick={(e) => { e.preventDefault(); navigate(to, section); }}
+                className="group flex items-center justify-between text-white hover:text-[#b1a17c] uppercase tracking-widest text-sm font-semibold py-3.5 border-b border-white/5 transition-colors"
+              >
+                {label}
+                <ChevronRight className="w-4 h-4 text-[#b1a17c]/40 group-hover:text-[#b1a17c] group-hover:translate-x-1 transition-all duration-300" />
+              </a>
+            );
+          })}
         </nav>
 
         {/* Drawer footer: contact + CTA */}
