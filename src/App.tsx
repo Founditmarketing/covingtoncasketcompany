@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 import LoadScreen from './components/LoadScreen';
+import SearchModal from './components/SearchModal';
 import Home from './pages/Home';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
@@ -23,6 +24,7 @@ const getRoute = () => window.location.hash.replace(/^#/, '') || '/';
 export default function App() {
   const [route, setRoute] = useState(getRoute());
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   // Intro sequence (home only): load screen -> reveal hero background -> content slides in.
   const [phase, setPhase] = useState<'load' | 'reveal' | 'done'>(() => (getRoute() === '/' ? 'load' : 'done'));
 
@@ -83,9 +85,11 @@ export default function App() {
     <div className="min-h-screen bg-[#152239] selection:bg-[#d21243] selection:text-white relative">
       {phase !== 'done' && <LoadScreen fading={phase === 'reveal'} />}
 
-      <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} navigate={navigate} route={route} />
+      <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} navigate={navigate} route={route} onSearch={() => setSearchOpen(true)} />
 
       <main>{page}</main>
+
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} navigate={navigate} />
 
       <Footer navigate={navigate} />
 

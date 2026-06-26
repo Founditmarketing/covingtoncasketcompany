@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Facebook, Instagram, Linkedin, Phone, ChevronRight, ChevronDown } from 'lucide-react';
+import { Menu, X, Facebook, Instagram, Linkedin, Phone, ChevronRight, ChevronDown, Search } from 'lucide-react';
 import { categories } from '../data/caskets';
 
 interface NavLink {
@@ -24,9 +24,10 @@ interface HeaderProps {
   setMenuOpen: (open: boolean) => void;
   navigate: (to: string, section?: string) => void;
   route: string;
+  onSearch: () => void;
 }
 
-export default function Header({ menuOpen, setMenuOpen, navigate, route }: HeaderProps) {
+export default function Header({ menuOpen, setMenuOpen, navigate, route, onSearch }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -135,9 +136,12 @@ export default function Header({ menuOpen, setMenuOpen, navigate, route }: Heade
           })}
         </nav>
 
-        {/* Right side: CTA (desktop) + mobile menu button */}
-        <div className="flex items-center shrink-0">
-          <button onClick={() => navigate('/contact')} className="btn-swipe hidden lg:inline-flex items-center bg-[#d21243] text-white [--btn-swipe:#152239] font-sans font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-sm">
+        {/* Right side: search + CTA (desktop) + mobile menu button */}
+        <div className="flex items-center shrink-0 gap-1">
+          <button onClick={onSearch} aria-label="Search the site" className="p-2 text-[#152239] hover:text-[#d21243] transition-colors">
+            <Search className="w-5 h-5" />
+          </button>
+          <button onClick={() => navigate('/contact')} className="btn-swipe hidden lg:inline-flex items-center bg-[#d21243] text-white [--btn-swipe:#152239] font-sans font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-sm ml-1">
             Get a Quote
           </button>
           <a
@@ -210,10 +214,10 @@ export default function Header({ menuOpen, setMenuOpen, navigate, route }: Heade
         {/* Drawer footer: contact + CTA */}
         <div className="mt-auto px-6 py-6 border-t border-white/10 space-y-4 shrink-0">
           <a
-            href="tel:+12544475090"
+            href="tel:+18007265570"
             className="btn-swipe flex items-center justify-center gap-2 bg-[#d21243] text-white [--btn-swipe:#152239] font-bold uppercase tracking-widest text-xs py-3.5 rounded-sm"
           >
-            <Phone className="w-4 h-4" /> Call (254) 447-5090
+            <Phone className="w-4 h-4" /> Call 1-800-726-5570
           </a>
           <a
             href="#/contact"

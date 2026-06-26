@@ -18,10 +18,10 @@ export default function CTASection() {
         </p>
         
         <div className="flex justify-center">
-          <button className="btn-swipe flex items-center justify-center bg-[#d21243] text-white [--btn-swipe:#152239] font-sans font-bold px-8 py-4 uppercase tracking-widest text-xs w-full sm:w-auto">
+          <a href="tel:+18007265570" className="btn-swipe flex items-center justify-center bg-[#d21243] text-white [--btn-swipe:#152239] font-sans font-bold px-8 py-4 uppercase tracking-widest text-xs w-full sm:w-auto">
             <Phone className="w-5 h-5 mr-3" />
-            (254) 447-5090
-          </button>
+            1-800-726-5570
+          </a>
         </div>
       </div>
     </section>

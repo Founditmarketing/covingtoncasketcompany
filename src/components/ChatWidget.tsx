@@ -2,8 +2,8 @@ import { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Phone, X, MessageCircle, Send } from 'lucide-react';
 
-const PHONE_DISPLAY = '(254) 447-5090';
-const PHONE_HREF = 'tel:+12544475090';
+const PHONE_DISPLAY = '1-800-726-5570';
+const PHONE_HREF = 'tel:+18007265570';
 
 const inputCls =
   'w-full bg-white/5 border border-white/10 focus:border-[#b1a17c] outline-none text-white text-sm px-3 py-2.5 rounded-sm placeholder:text-white/30 transition-colors';

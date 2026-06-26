@@ -10,13 +10,16 @@ const PHONE_DISPLAY = '1-800-726-5570';
 const PHONE_HREF = 'tel:+18007265570';
 
 const staff = [
-  { name: 'Alan Williamson', role: 'President / CEO', email: 'awilliamson@covingtoncasket.com' },
-  { name: 'Andrew Williamson', role: 'Sales', email: 'andrew@covingtoncasket.com' },
-  { name: 'Debbie Turner', role: 'Customer Service', email: 'debbie@covingtoncasket.com' },
-  { name: 'Beth Davis', role: 'Office Manager', email: 'beth@covingtoncasket.com' },
-  { name: 'Breanna Willis', role: 'Warehouse Sales', email: 'breanna@covingtoncasket.com' },
-  { name: 'Steven Previtt', role: 'Plant Operations', email: null },
+  { name: 'Alan Williamson', role: 'President / CEO', email: 'awilliamson@covingtoncasket.com', photo: '/team/alan.jpg' },
+  { name: 'Andrew Williamson', role: 'Sales', email: 'andrew@covingtoncasket.com', photo: '/team/andrew.jpg' },
+  { name: 'Debbie Turner', role: 'Customer Service', email: 'debbie@covingtoncasket.com', photo: '/team/debbie.jpg' },
+  { name: 'Beth Davis', role: 'Office Manager', email: 'beth@covingtoncasket.com', photo: '/team/beth.jpg' },
+  { name: 'Breanna Willis', role: 'Warehouse Sales', email: 'breanna@covingtoncasket.com', photo: '/team/breanna.jpg' },
+  { name: 'Steven Previtt', role: 'Plant Operations', email: null, photo: null },
 ];
+
+const initials = (n: string) =>
+  n.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase();
 
 const inputCls =
   'w-full bg-white border border-[#152239]/15 focus:border-[#b1a17c] outline-none text-[#152239] text-sm px-4 py-3 rounded-none placeholder:text-[#152239]/40 transition-colors';
@@ -45,10 +48,10 @@ export default function ContactPage(_props: PageProps) {
           </span>
           <h1 className="text-5xl md:text-6xl font-light leading-tight mb-6">Contact Us</h1>
           <p className="font-sans text-white/70 text-base md:text-lg leading-relaxed">
-            We&rsquo;re here to assist funeral professionals across the Southeast — day or night.
+            We&rsquo;re here to assist funeral professionals across the Southeast.
           </p>
           <p className="font-sans text-[#b1a17c] text-xs uppercase tracking-widest mt-5">
-            Covington Casket sells exclusively to licensed funeral homes
+            Covington Casket only sells caskets to licensed funeral homes
           </p>
         </div>
       </section>
@@ -61,7 +64,7 @@ export default function ContactPage(_props: PageProps) {
           <div>
             <h2 className="text-3xl md:text-4xl font-light mb-8">Reach Covington</h2>
 
-            <div className="space-y-6 mb-12">
+            <div className="space-y-7">
               <a href={PHONE_HREF} className="flex items-start gap-4 group">
                 <Phone className="w-5 h-5 text-[#b1a17c] mt-1 shrink-0" />
                 <span>
@@ -80,23 +83,9 @@ export default function ContactPage(_props: PageProps) {
               </div>
             </div>
 
-            <h3 className="text-xl font-light mb-5 border-b border-[#152239]/10 pb-3">Our Team</h3>
-            <ul className="space-y-4">
-              {staff.map((s) => (
-                <li key={s.name} className="flex items-start gap-3">
-                  <span className="w-2 h-2 rotate-45 bg-[#b1a17c] mt-1.5 shrink-0" aria-hidden="true" />
-                  <span className="font-sans text-sm">
-                    <span className="font-semibold">{s.name}</span>
-                    <span className="text-[#152239]/55"> — {s.role}</span>
-                    {s.email && (
-                      <a href={`mailto:${s.email}`} className="flex items-center gap-1.5 text-[#b1a17c] hover:text-[#152239] transition-colors text-xs mt-0.5">
-                        <Mail className="w-3 h-3" /> {s.email}
-                      </a>
-                    )}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <p className="mt-8 border-l-2 border-[#b1a17c] pl-4 font-sans text-sm text-[#152239]/70 italic">
+              Covington Casket only sells caskets to licensed funeral homes. We&rsquo;re located in the Andalusia Industrial Park Complex.
+            </p>
           </div>
 
           {/* Right: contact form */}
@@ -122,6 +111,41 @@ export default function ContactPage(_props: PageProps) {
             )}
           </div>
 
+        </div>
+      </section>
+
+      {/* Our Team */}
+      <section className="bg-[#152239] py-20 lg:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-[#b1a17c] font-sans uppercase tracking-[0.4em] text-[10px] mb-4 flex items-center justify-center gap-3">
+              <span className="h-px w-8 bg-[#b1a17c]/60" /> Our Team <span className="h-px w-8 bg-[#b1a17c]/60" />
+            </span>
+            <h2 className="text-4xl md:text-5xl font-light">Meet the Covington Family</h2>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 max-w-4xl mx-auto">
+            {staff.map((s) => (
+              <div key={s.name} className="text-center">
+                <div className="card-frame relative p-2 bg-white/5 border border-white/10 mb-4">
+                  {s.photo ? (
+                    <img src={s.photo} alt={s.name} loading="lazy" decoding="async" className="w-full aspect-[4/5] object-cover object-center" />
+                  ) : (
+                    <div className="w-full aspect-[4/5] flex items-center justify-center bg-[#0d1625]">
+                      <span className="text-4xl text-[#b1a17c]" style={{ fontFamily: "'Cinzel', serif" }}>{initials(s.name)}</span>
+                    </div>
+                  )}
+                </div>
+                <h3 className="text-lg md:text-xl font-light leading-tight">{s.name}</h3>
+                <p className="font-sans text-[10px] uppercase tracking-widest text-[#b1a17c] mt-1 mb-2">{s.role}</p>
+                {s.email && (
+                  <a href={`mailto:${s.email}`} className="inline-flex items-center gap-1.5 font-sans text-[11px] text-white/55 hover:text-[#b1a17c] transition-colors break-all">
+                    <Mail className="w-3 h-3 shrink-0" /> {s.email}
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
