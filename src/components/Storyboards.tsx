@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { Paintbrush } from 'lucide-react';
 
-export default function Storyboards() {
+export default function Storyboards({ navigate }: { navigate: (to: string) => void }) {
   return (
     <section className="pt-24 pb-10 md:pb-28 bg-[#0d1625] text-white relative overflow-hidden font-serif border-t border-white/5">
 
@@ -38,7 +38,7 @@ export default function Storyboards() {
               Beloved Landscapes & Hobbies
             </li>
           </ul>
-          <button className="btn-swipe bg-[#d21243] text-white [--btn-swipe:#152239] font-sans font-bold px-8 py-4 uppercase tracking-widest text-xs rounded-sm">
+          <button onClick={() => navigate('/storyboards')} className="btn-swipe bg-[#d21243] text-white [--btn-swipe:#152239] font-sans font-bold px-8 py-4 uppercase tracking-widest text-xs rounded-sm">
             View Storyboard Gallery
           </button>
         </div>

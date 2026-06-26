@@ -28,7 +28,7 @@ const caskets = [
 
 const N = caskets.length;
 
-export default function CasketShowcase() {
+export default function CasketShowcase({ navigate }: { navigate: (to: string) => void }) {
   // Triple-rendered for a seamless infinite loop.
   const items = [...caskets, ...caskets, ...caskets];
   const [pos, setPos] = useState(N);
@@ -137,7 +137,7 @@ export default function CasketShowcase() {
               Every Covington casket is manufactured with precision and care, ensuring a flawless presentation for the families you serve.
             </p>
           </div>
-          <button className="hidden md:flex items-center text-[#b1a17c] font-sans font-bold uppercase tracking-widest text-xs hover:text-white transition-colors group">
+          <button onClick={() => navigate('/caskets')} className="hidden md:flex items-center text-[#b1a17c] font-sans font-bold uppercase tracking-widest text-xs hover:text-white transition-colors group">
             View Full Catalog
             <MoveRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
           </button>
