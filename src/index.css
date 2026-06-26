@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -10,6 +10,20 @@
   --color-covington-red: #d21243;
   --color-covington-cream: #f9f8f6;
   --color-covington-taupe: #e8e4db;
+}
+
+/* Section titles echo the logo's "COVINGTON" wordmark: classical Roman
+   capitals (Cinzel) at a thin weight, all caps. Unlayered so it overrides
+   Tailwind's font-serif / font-light / italic utilities site-wide. */
+h1, h2, h3 {
+  font-family: "Cinzel", "Playfair Display", Georgia, serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+/* Cinzel has no italic; keep accent spans upright in the same face. */
+h1 span, h2 span, h3 span {
+  font-style: normal;
 }
 
 /* Elegant thin inner border for cards. Apply to a positioned element. */

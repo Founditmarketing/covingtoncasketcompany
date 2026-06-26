@@ -30,26 +30,26 @@ export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
     <header className="w-full sticky top-0 z-50 shadow-md font-serif">
       {/* Top Bar */}
       <div className="bg-[#152239] border-b border-[#b1a17c]/20 text-white text-[10px] tracking-widest uppercase">
-        <div className="relative w-full flex items-center justify-between px-4 lg:px-8 py-2">
-          {/* Social */}
-          <a href="#" aria-label="Covington Casket Company on Facebook" className="text-[#b1a17c] hover:text-white transition-colors shrink-0">
+        <div className="relative w-full flex items-center justify-between px-4 lg:px-8 py-2 min-h-8">
+          {/* Social — desktop only (on mobile the Facebook icon sits by the hamburger) */}
+          <a href="#" aria-label="Covington Casket Company on Facebook" className="hidden lg:block text-[#b1a17c] hover:text-white transition-colors shrink-0">
             <Facebook className="w-4 h-4" />
           </a>
 
-          {/* Centered tagline */}
+          {/* Centered tagline (desktop) */}
           <p className="absolute left-1/2 -translate-x-1/2 opacity-80 hidden lg:block whitespace-nowrap">
             Serving Premiere Funeral Homes across the Southeast | EST. 1924
           </p>
 
-          {/* Right side: service areas (desktop) / phone (mobile) */}
-          <div className="flex items-center shrink-0 ml-auto">
-            <span className="hidden md:inline opacity-70 italic font-sans normal-case">
-              Alabama • Georgia • Florida • Mississippi • Louisiana
-            </span>
-            <span className="md:hidden opacity-80 text-[#b1a17c]">
-              Family Owned Since 1924
-            </span>
-          </div>
+          {/* Centered message (mobile) */}
+          <span className="md:hidden absolute left-1/2 -translate-x-1/2 opacity-80 text-[#b1a17c] whitespace-nowrap">
+            Family Owned &amp; Operated Since 1924
+          </span>
+
+          {/* Service areas (tablet/desktop) */}
+          <span className="hidden md:inline opacity-70 italic font-sans normal-case ml-auto">
+            Alabama • Georgia • Florida • Mississippi • Louisiana
+          </span>
         </div>
       </div>
 
@@ -76,6 +76,13 @@ export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
           <button className="btn-swipe hidden lg:inline-flex items-center bg-[#d21243] text-white [--btn-swipe:#152239] font-sans font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-sm">
             Get a Quote
           </button>
+          <a
+            href="#"
+            aria-label="Covington Casket Company on Facebook"
+            className="lg:hidden p-2 text-[#152239] hover:text-[#d21243] transition-colors"
+          >
+            <Facebook className="w-5 h-5" />
+          </a>
           <button
             onClick={() => setMenuOpen(true)}
             className="lg:hidden p-2 text-[#152239]"
