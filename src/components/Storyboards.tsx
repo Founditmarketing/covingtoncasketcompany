@@ -38,40 +38,40 @@ export default function Storyboards() {
               Beloved Landscapes & Hobbies
             </li>
           </ul>
-          <button className="bg-transparent border border-[#b1a17c] text-[#b1a17c] hover:bg-[#b1a17c]/10 hover:text-white font-sans font-bold px-8 py-4 uppercase tracking-widest text-xs transition-colors duration-300">
+          <button className="btn-swipe bg-[#d21243] text-white [--btn-swipe:#152239] font-sans font-bold px-8 py-4 uppercase tracking-widest text-xs rounded-sm shadow-[0_0_20px_rgba(210,18,67,0.35)]">
             View Storyboard Gallery
           </button>
         </div>
 
-        {/* Right: Cascading Images */}
-        <div className="w-full lg:w-7/12 relative h-[500px] md:h-[600px]">
+        {/* Right: storyboard images — stacked on mobile, cascading on desktop */}
+        <div className="w-full lg:w-7/12 flex flex-col gap-5 lg:block lg:relative lg:h-[600px]">
 
           <motion.div
-            initial={{ opacity: 0, y: 50, rotate: -5 }}
-            whileInView={{ opacity: 1, y: 0, rotate: -5 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className="card-frame absolute top-10 left-0 w-2/3 shadow-[0_0_30px_rgba(0,0,0,0.8)] z-10 border border-white/20 p-2 bg-white/5 backdrop-blur-sm rounded-sm"
+            className="card-frame relative w-full lg:absolute lg:top-10 lg:left-0 lg:w-2/3 lg:-rotate-[5deg] shadow-[0_0_30px_rgba(0,0,0,0.8)] lg:z-10 border border-white/20 p-2 bg-white/5 backdrop-blur-sm rounded-sm"
           >
             <img src="/LIVES-storyboard.avif" alt="&ldquo;Because He Lives&rdquo; landscape storyboard" loading="lazy" decoding="async" className="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity" />
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 50, rotate: 5 }}
-            whileInView={{ opacity: 1, y: 0, rotate: 5 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
             viewport={{ once: true }}
-            className="card-frame absolute top-1/3 right-0 w-2/3 shadow-[0_0_30px_rgba(0,0,0,0.8)] z-20 border border-white/20 p-2 bg-white/5 backdrop-blur-sm rounded-sm"
+            className="card-frame relative w-full lg:absolute lg:top-1/3 lg:right-0 lg:w-2/3 lg:rotate-[5deg] shadow-[0_0_30px_rgba(0,0,0,0.8)] lg:z-20 border border-white/20 p-2 bg-white/5 backdrop-blur-sm rounded-sm"
           >
             <img src="/ARMY-storyboard.avif" alt="United States Army veteran tribute storyboard" loading="lazy" decoding="async" className="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity" />
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 50, rotate: 0 }}
-            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
             viewport={{ once: true }}
-            className="card-frame absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 shadow-[0_0_40px_rgba(0,0,0,0.9)] z-30 border border-white/20 p-2 bg-[#152239] rounded-sm"
+            className="card-frame relative w-full lg:absolute lg:bottom-0 lg:left-[16.6%] lg:w-2/3 shadow-[0_0_40px_rgba(0,0,0,0.9)] lg:z-30 border border-white/20 p-2 bg-[#152239] rounded-sm"
           >
             <img src="/KING-storyboard.avif" alt="&ldquo;Gone to See the King&rdquo; tribute storyboard" loading="lazy" decoding="async" className="w-full h-auto object-cover opacity-95 hover:opacity-100 transition-opacity" />
           </motion.div>

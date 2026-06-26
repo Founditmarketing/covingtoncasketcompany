@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { TransitionEvent as ReactTransitionEvent, PointerEvent as ReactPointerEvent } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -27,17 +27,25 @@ const caskets = [
 ];
 
 const N = caskets.length;
-const SLOT = 62;                  // % of full viewport width per card slot
-const OFFSET = (100 - SLOT) / 2;  // centers the active card -> symmetric peek
 
 export default function CasketShowcase() {
   // Triple-rendered for a seamless infinite loop.
   const items = [...caskets, ...caskets, ...caskets];
   const [pos, setPos] = useState(N);
   const [withTransition, setWithTransition] = useState(true);
+  // % of viewport per card slot: near-full on mobile (focused, tiny peek), wider peek on desktop.
+  const [slot, setSlot] = useState(62);
   const animating = useRef(false);
   const dragX = useRef<number | null>(null);
   const active = ((pos % N) + N) % N;
+  const offset = (100 - slot) / 2; // centers the active card -> symmetric peek
+
+  useEffect(() => {
+    const update = () => setSlot(window.innerWidth < 768 ? 90 : 62);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
 
   const move = (dir: number) => {
     if (animating.current) return;
@@ -101,7 +109,7 @@ export default function CasketShowcase() {
         <div
           className="flex select-none"
           style={{
-            transform: `translateX(${-pos * SLOT + OFFSET}%)`,
+            transform: `translateX(${-pos * slot + offset}%)`,
             transition: withTransition ? 'transform 600ms cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
           }}
           onTransitionEnd={handleTransitionEnd}
@@ -109,8 +117,8 @@ export default function CasketShowcase() {
           onPointerUp={onPointerUp}
         >
           {items.map((c, i) => (
-            <div key={i} className="shrink-0 px-3" style={{ width: `${SLOT}%` }}>
-              <div className="card-frame relative bg-[#152239] rounded-sm overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)] h-[440px] md:h-[560px] flex flex-col">
+            <div key={i} className="shrink-0 px-2 md:px-3" style={{ width: `${slot}%` }}>
+              <div className="card-frame relative bg-[#152239] rounded-sm overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)] h-[400px] md:h-[560px] flex flex-col">
                 {/* Casket — fully visible, no overlay */}
                 <div className="flex-1 min-h-0 relative flex items-center justify-center p-2">
                   <img

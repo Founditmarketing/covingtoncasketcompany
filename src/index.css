@@ -32,3 +32,33 @@
   pointer-events: none;
   z-index: 1;
 }
+
+/* Solid buttons with a diagonal color-swipe hover fill.
+   Pair with Tailwind bg/text colors and set the swipe color per button
+   via the --btn-swipe custom property, e.g. [--btn-swipe:#152239]. */
+.btn-swipe {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-swipe::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -10%;
+  width: 120%;
+  background: var(--btn-swipe, rgba(255, 255, 255, 0.18));
+  transform: translateX(-108%) skewX(-12deg);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+.btn-swipe:hover::before,
+.btn-swipe:focus-visible::before {
+  transform: translateX(0) skewX(-12deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-swipe::before {
+    transition-duration: 0.01ms;
+  }
+}

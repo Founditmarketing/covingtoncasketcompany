@@ -77,7 +77,7 @@ export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
 
         {/* Right side: CTA (desktop) + mobile menu button */}
         <div className="flex items-center shrink-0">
-          <button className="hidden lg:inline-flex items-center bg-[#d21243] text-white font-sans font-bold text-xs uppercase tracking-widest px-6 py-3 transition-all duration-300 shadow-[0_0_20px_rgba(210,18,67,0.35)] hover:scale-105">
+          <button className="btn-swipe hidden lg:inline-flex items-center bg-[#d21243] text-white [--btn-swipe:#152239] font-sans font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-sm shadow-[0_0_20px_rgba(210,18,67,0.35)]">
             Get a Quote
           </button>
           <button
@@ -142,14 +142,14 @@ export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
         <div className="mt-auto px-6 py-6 border-t border-white/10 space-y-4 shrink-0">
           <a
             href="tel:+12544475090"
-            className="flex items-center justify-center gap-2 bg-[#d21243] text-white font-bold uppercase tracking-widest text-xs py-3.5 rounded-sm shadow-[0_0_20px_rgba(210,18,67,0.35)] hover:scale-[1.02] transition-transform"
+            className="btn-swipe flex items-center justify-center gap-2 bg-[#d21243] text-white [--btn-swipe:#152239] font-bold uppercase tracking-widest text-xs py-3.5 rounded-sm shadow-[0_0_20px_rgba(210,18,67,0.35)]"
           >
             <Phone className="w-4 h-4" /> Call (254) 447-5090
           </a>
           <a
             href="#"
             onClick={() => setMenuOpen(false)}
-            className="block text-center border border-[#b1a17c] text-[#b1a17c] hover:bg-[#b1a17c] hover:text-[#152239] font-bold uppercase tracking-widest text-xs py-3.5 rounded-sm transition-colors"
+            className="btn-swipe block text-center bg-[#152239] border border-[#b1a17c] text-white [--btn-swipe:#d21243] font-bold uppercase tracking-widest text-xs py-3.5 rounded-sm"
           >
             Get a Quote
           </a>

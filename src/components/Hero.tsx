@@ -33,10 +33,10 @@ export default function Hero() {
             Custom, world-class caskets and artistic, pictorial Storyboards that help you tell your loved one's story. We manufacture and serve premiere funeral homes across the Southeast.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="px-8 py-4 bg-[#152239] border-2 border-[#d21243] text-[#b1a17c] text-xs font-bold font-sans uppercase tracking-widest flex items-center justify-center gap-3 shadow-[0_0_15px_rgba(210,18,67,0.3)] hover:shadow-[0_0_25px_rgba(210,18,67,0.5)] hover:-translate-y-0.5 transition-all duration-300">
-              Discover Caskets <span className="text-[#d21243] text-lg leading-none">→</span>
+            <button className="btn-swipe px-8 py-4 rounded-sm bg-[#d21243] text-white [--btn-swipe:#152239] text-xs font-bold font-sans uppercase tracking-widest flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(210,18,67,0.35)]">
+              Discover Caskets <span className="text-white text-lg leading-none">→</span>
             </button>
-            <button className="px-8 py-4 bg-transparent border border-[#b1a17c] text-white text-xs font-bold font-sans uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-[#b1a17c]/10 transition-colors duration-300">
+            <button className="btn-swipe px-8 py-4 rounded-sm bg-[#152239] border border-[#b1a17c] text-white [--btn-swipe:#d21243] text-xs font-bold font-sans uppercase tracking-widest flex items-center justify-center gap-3">
               Personalize Storyboards
             </button>
           </div>
