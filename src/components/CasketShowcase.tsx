@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import type { TransitionEvent as ReactTransitionEvent, PointerEvent as ReactPointerEvent } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MoveRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const caskets = [
   {
@@ -37,6 +37,7 @@ export default function CasketShowcase() {
   const [slot, setSlot] = useState(62);
   const animating = useRef(false);
   const start = useRef<{ x: number; y: number } | null>(null);
+  const startTime = useRef(0);
   const dragging = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [dragPct, setDragPct] = useState(0);
@@ -80,6 +81,7 @@ export default function CasketShowcase() {
   const onPointerDown = (e: ReactPointerEvent) => {
     if (animating.current) return;
     start.current = { x: e.clientX, y: e.clientY };
+    startTime.current = performance.now();
     dragging.current = false;
   };
   const onPointerMove = (e: ReactPointerEvent) => {
@@ -99,16 +101,17 @@ export default function CasketShowcase() {
   const endDrag = (e: ReactPointerEvent) => {
     if (!start.current) return;
     const dx = e.clientX - start.current.x;
+    const dt = Math.max(1, performance.now() - startTime.current);
     const wasDragging = dragging.current;
     start.current = null;
     dragging.current = false;
     setDragPct(0);
     setWithTransition(true);
     if (!wasDragging) return;
-    const w = containerRef.current?.offsetWidth || window.innerWidth;
-    const threshold = w * (slot / 100) * 0.18; // ~18% of a card advances
-    if (dx < -threshold) move(1);
-    else if (dx > threshold) move(-1);
+    // Advance on a modest drag (50px) or a quick flick, whichever comes first.
+    const flick = Math.abs(dx) / dt > 0.45 && Math.abs(dx) > 24;
+    if (dx < -50 || (flick && dx < 0)) move(1);
+    else if (dx > 50 || (flick && dx > 0)) move(-1);
   };
   const onPointerCancel = () => {
     if (!start.current) return;
@@ -136,7 +139,7 @@ export default function CasketShowcase() {
           </div>
           <button className="hidden md:flex items-center text-[#b1a17c] font-sans font-bold uppercase tracking-widest text-xs hover:text-white transition-colors group">
             View Full Catalog
-            <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
+            <MoveRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
           </button>
         </div>
       </div>

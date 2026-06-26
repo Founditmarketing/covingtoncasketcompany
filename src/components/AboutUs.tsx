@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Play } from 'lucide-react';
+import { Play, MoveRight } from 'lucide-react';
 
 export default function AboutUs() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -70,8 +70,8 @@ export default function AboutUs() {
           <p className="font-sans text-[#152239]/70 text-sm leading-relaxed mb-8">
             We bypass the middleman, offering you uncompromising quality, bespoke customization through our exclusive Storyboards, and unparalleled service—ensuring you can offer the very best to the families you serve.
           </p>
-          <button className="text-[#b1a17c] border-b border-[#b1a17c]/50 pb-1 font-sans font-bold uppercase tracking-widest text-xs hover:text-[#152239] hover:border-[#152239] transition-colors duration-300 flex items-center gap-2">
-            Learn More About Covington <span className="text-lg leading-none">→</span>
+          <button className="group text-[#b1a17c] border-b border-[#b1a17c]/50 pb-1 font-sans font-bold uppercase tracking-widest text-xs hover:text-[#152239] hover:border-[#152239] transition-colors duration-300 flex items-center gap-2">
+            Learn More About Covington <MoveRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
         </div>
 

@@ -1,38 +1,34 @@
+const trustItems = [
+  'Family Owned Since 1924',
+  'Premier Partner — Oak Ridge',
+  'Southern Funeral Directors',
+  'BBB Accredited A+',
+  'Florida Directors Guild',
+  'Veteran Recognized',
+  '280+ Trusted Partners',
+  'Serving the Southeast',
+];
+
 export default function TrustBanner() {
+  // Render the list twice so the -50% scroll loops seamlessly.
+  const loop = [...trustItems, ...trustItems];
+
   return (
-    <section className="bg-[#0d1625] py-6 border-y border-white/5 relative overflow-hidden font-sans">
-      <div className="max-w-7xl mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center">
-        
-        <div className="text-[#b1a17c] text-xs font-bold w-full md:w-64 border-b md:border-b-0 md:border-r border-white/10 pb-4 md:pb-0 md:pr-6 mb-4 md:mb-0 text-center md:text-left">
-          THE COVINGTON LEGACY
-          <div className="text-[9px] opacity-50 font-normal mt-1">FAMILY OWNED SINCE 1924</div>
-        </div>
-        
-        <div className="flex-1 w-full grid grid-cols-2 md:grid-cols-4 gap-4 px-0 md:px-8 opacity-40 grayscale contrast-125">
-          <div className="flex flex-col items-center text-center">
-            <span className="text-[10px] md:text-xs font-bold text-white">PREMIER PARTNER: OAK RIDGE</span>
-            <span className="text-[8px] text-white">ESTABLISHED 1932</span>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <span className="text-[10px] md:text-xs font-bold uppercase text-white">Southern Funeral Directors</span>
-            <span className="text-[8px] text-white">MEMBER SINCE 1945</span>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <span className="text-[10px] md:text-xs font-bold text-white">BBB ACCREDITED A+</span>
-            <span className="text-[8px] text-white">VETERAN RECOGNIZED</span>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <span className="text-[10px] md:text-xs font-bold uppercase text-white">FLORIDA DIRECTORS GUILD</span>
-            <span className="text-[8px] text-white">GOLD STATUS</span>
-          </div>
-        </div>
+    <section className="trust-marquee bg-[#0d1625] py-5 border-y border-[#b1a17c]/15 relative overflow-hidden font-sans">
+      {/* Edge fades so items melt in/out at the borders */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-[#0d1625] to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-[#0d1625] to-transparent z-10" />
 
-        <div className="hidden md:flex gap-1.5 ml-8">
-           <div className="w-1.5 h-1.5 rounded-full bg-[#d21243]" />
-           <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-           <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-        </div>
-
+      <div className="marquee-track items-center">
+        {loop.map((item, i) => (
+          <div key={i} className="flex items-center shrink-0" aria-hidden={i >= trustItems.length}>
+            {/* Each label gets symmetric padding; the diamond sits centered between labels */}
+            <span className="px-8 md:px-12 text-white/75 text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] whitespace-nowrap">
+              {item}
+            </span>
+            <span className="w-1.5 h-1.5 rotate-45 bg-[#b1a17c] shrink-0" aria-hidden="true" />
+          </div>
+        ))}
       </div>
     </section>
   );

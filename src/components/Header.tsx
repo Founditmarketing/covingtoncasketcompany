@@ -1,14 +1,32 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Facebook, Instagram, Linkedin, Phone, ChevronRight } from 'lucide-react';
+import { Menu, X, Facebook, Instagram, Linkedin, Phone, ChevronRight, ChevronDown } from 'lucide-react';
+import { categories } from '../data/caskets';
 
-const navLinks = ['Home', 'Immediate Need', 'Our Caskets', 'Storyboards', 'About Us', 'Contact Us', 'Jobs!'];
+interface NavLink {
+  label: string;
+  to: string;
+  section?: string;
+  dropdown?: boolean;
+}
+
+const navLinks: NavLink[] = [
+  { label: 'Home', to: '/' },
+  { label: 'Immediate Need', to: '/immediate-need' },
+  { label: 'Our Caskets', to: '/caskets', dropdown: true },
+  { label: 'Storyboards', to: '/storyboards' },
+  { label: 'About Us', to: '/about' },
+  { label: 'Contact Us', to: '/contact' },
+  { label: 'Jobs!', to: '/jobs' },
+];
 
 interface HeaderProps {
   menuOpen: boolean;
   setMenuOpen: (open: boolean) => void;
+  navigate: (to: string, section?: string) => void;
+  route: string;
 }
 
-export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
+export default function Header({ menuOpen, setMenuOpen, navigate, route }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -31,10 +49,10 @@ export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
       {/* Top Bar */}
       <div className="bg-[#152239] border-b border-[#b1a17c]/20 text-white text-[10px] tracking-widest uppercase">
         <div className="relative w-full flex items-center justify-between px-4 lg:px-8 py-2 min-h-8">
-          {/* Social — desktop only (on mobile the Facebook icon sits by the hamburger) */}
-          <a href="#" aria-label="Covington Casket Company on Facebook" className="hidden lg:block text-[#b1a17c] hover:text-white transition-colors shrink-0">
-            <Facebook className="w-4 h-4" />
-          </a>
+          {/* Service areas (tablet/desktop) — left */}
+          <span className="hidden md:inline opacity-70 italic font-sans normal-case">
+            Alabama • Georgia • Florida • Mississippi • Louisiana
+          </span>
 
           {/* Centered tagline (desktop) */}
           <p className="absolute left-1/2 -translate-x-1/2 opacity-80 hidden lg:block whitespace-nowrap">
@@ -46,17 +64,17 @@ export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
             Family Owned &amp; Operated Since 1924
           </span>
 
-          {/* Service areas (tablet/desktop) */}
-          <span className="hidden md:inline opacity-70 italic font-sans normal-case ml-auto">
-            Alabama • Georgia • Florida • Mississippi • Louisiana
-          </span>
+          {/* Social — desktop only, right (on mobile the Facebook icon sits by the hamburger) */}
+          <a href="https://www.facebook.com/Covingtoncasket/" target="_blank" rel="noopener noreferrer" aria-label="Covington Casket Company on Facebook" className="hidden lg:block text-[#b1a17c] hover:text-white transition-colors shrink-0 ml-auto">
+            <Facebook className="w-4 h-4" />
+          </a>
         </div>
       </div>
 
       {/* Main Navigation (white) */}
       <div className={`relative w-full px-4 lg:px-8 flex items-center justify-between bg-white border-b border-[#152239]/10 transition-all duration-300 ${scrolled ? 'py-1.5' : 'py-2'}`}>
         {/* Logo */}
-        <a href="#" className="flex items-center shrink-0" aria-label="Covington Casket Company home">
+        <a href="#/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="flex items-center shrink-0" aria-label="Covington Casket Company home">
           <img
             src="/covingtoncasket-longlogo.png"
             alt="Covington Casket Company"
@@ -66,18 +84,66 @@ export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
 
         {/* Desktop Menu — perfectly centered horizontally */}
         <nav className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center space-x-6 font-sans text-[11px] font-semibold tracking-widest">
-          {navLinks.map((label) => (
-            <a key={label} href="#" className="text-[#152239] hover:text-[#b1a17c] transition-colors py-2 uppercase whitespace-nowrap">{label}</a>
-          ))}
+          {navLinks.map(({ label, to, section, dropdown }) => {
+            if (dropdown) {
+              const active = route.startsWith('/caskets');
+              return (
+                <div key={label} className="relative group/cask">
+                  <a
+                    href={'#' + to}
+                    onClick={(e) => { e.preventDefault(); navigate(to); }}
+                    className={`flex items-center gap-1.5 py-2 uppercase whitespace-nowrap transition-colors ${active ? 'text-[#b1a17c]' : 'text-[#152239] hover:text-[#b1a17c]'}`}
+                  >
+                    {label}
+                    <ChevronDown className="w-3.5 h-3.5 transition-transform duration-300 group-hover/cask:rotate-180" />
+                  </a>
+                  <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible translate-y-1 group-hover/cask:opacity-100 group-hover/cask:visible group-hover/cask:translate-y-0 focus-within:opacity-100 focus-within:visible transition-all duration-200">
+                    <div className="bg-[#152239] border border-[#b1a17c]/25 shadow-[0_20px_50px_rgba(0,0,0,0.45)] py-2 min-w-[15rem]">
+                      {categories.map((c) => (
+                        <a
+                          key={c.slug}
+                          href={`#/caskets/${c.slug}`}
+                          onClick={(e) => { e.preventDefault(); navigate(`/caskets/${c.slug}`); }}
+                          className="block px-5 py-2.5 text-[11px] uppercase tracking-widest text-white/75 hover:text-[#b1a17c] hover:bg-white/5 whitespace-nowrap transition-colors"
+                        >
+                          {c.name}
+                        </a>
+                      ))}
+                      <a
+                        href="#/caskets"
+                        onClick={(e) => { e.preventDefault(); navigate('/caskets'); }}
+                        className="block px-5 py-2.5 mt-1 border-t border-white/10 text-[11px] uppercase tracking-widest text-[#b1a17c] hover:bg-white/5 whitespace-nowrap"
+                      >
+                        View All Caskets
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            const active = route === to && !section;
+            return (
+              <a
+                key={label}
+                href={'#' + to}
+                onClick={(e) => { e.preventDefault(); navigate(to, section); }}
+                className={`transition-colors py-2 uppercase whitespace-nowrap ${active ? 'text-[#b1a17c]' : 'text-[#152239] hover:text-[#b1a17c]'}`}
+              >
+                {label}
+              </a>
+            );
+          })}
         </nav>
 
         {/* Right side: CTA (desktop) + mobile menu button */}
         <div className="flex items-center shrink-0">
-          <button className="btn-swipe hidden lg:inline-flex items-center bg-[#d21243] text-white [--btn-swipe:#152239] font-sans font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-sm">
+          <button onClick={() => navigate('/contact')} className="btn-swipe hidden lg:inline-flex items-center bg-[#d21243] text-white [--btn-swipe:#152239] font-sans font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-sm">
             Get a Quote
           </button>
           <a
-            href="#"
+            href="https://www.facebook.com/Covingtoncasket/"
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="Covington Casket Company on Facebook"
             className="lg:hidden p-2 text-[#152239] hover:text-[#d21243] transition-colors"
           >
@@ -128,11 +194,11 @@ export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
 
         {/* Nav links */}
         <nav className="flex flex-col px-6 py-4 font-sans overflow-y-auto">
-          {navLinks.map((label) => (
+          {navLinks.map(({ label, to, section }) => (
             <a
               key={label}
-              href="#"
-              onClick={() => setMenuOpen(false)}
+              href={'#' + to}
+              onClick={(e) => { e.preventDefault(); navigate(to, section); }}
               className="group flex items-center justify-between text-white hover:text-[#b1a17c] uppercase tracking-widest text-sm font-semibold py-3.5 border-b border-white/5 transition-colors"
             >
               {label}
@@ -150,14 +216,14 @@ export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
             <Phone className="w-4 h-4" /> Call (254) 447-5090
           </a>
           <a
-            href="#"
-            onClick={() => setMenuOpen(false)}
+            href="#/contact"
+            onClick={(e) => { e.preventDefault(); navigate('/contact'); }}
             className="btn-swipe block text-center bg-[#152239] border border-[#b1a17c] text-white [--btn-swipe:#d21243] font-bold uppercase tracking-widest text-xs py-3.5 rounded-sm"
           >
             Get a Quote
           </a>
           <div className="flex justify-center gap-6 pt-1">
-            <a href="#" aria-label="Facebook" className="text-white/40 hover:text-[#b1a17c] transition-colors">
+            <a href="https://www.facebook.com/Covingtoncasket/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-white/40 hover:text-[#b1a17c] transition-colors">
               <Facebook className="w-4 h-4" />
             </a>
             <a href="#" aria-label="Instagram" className="text-white/40 hover:text-[#b1a17c] transition-colors">

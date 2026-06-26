@@ -25,7 +25,7 @@ export default function ChatWidget({ hidden = false }: { hidden?: boolean }) {
 
   return (
     <div
-      className={`fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 font-sans ${hidden ? 'hidden' : ''}`}
+      className={`fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 font-sans pointer-events-none ${hidden ? 'hidden' : ''}`}
     >
       {/* Pop-up window */}
       <div
@@ -97,7 +97,7 @@ export default function ChatWidget({ hidden = false }: { hidden?: boolean }) {
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? 'Close contact window' : 'Open contact window'}
         aria-expanded={open}
-        className="w-14 h-14 bg-[#d21243] flex items-center justify-center rounded-sm border border-white/20 hover:scale-105 transition-transform shrink-0"
+        className="pointer-events-auto w-14 h-14 bg-[#d21243] flex items-center justify-center rounded-sm border border-white/20 hover:scale-105 transition-transform shrink-0"
       >
         {open ? <X className="w-6 h-6 text-white" /> : <MessageCircle className="w-6 h-6 text-white" />}
       </button>

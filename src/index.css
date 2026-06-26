@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -10,6 +10,102 @@
   --color-covington-red: #d21243;
   --color-covington-cream: #f9f8f6;
   --color-covington-taupe: #e8e4db;
+}
+
+/* Infinite, seamless trust-banner marquee. The track holds two identical
+   copies of the content; sliding it -50% loops with no visible seam. */
+@keyframes trust-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: trust-marquee 45s linear infinite;
+  will-change: transform;
+}
+.trust-marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Smooth in-page navigation to section anchors. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Navy base so there's no white flash before the load screen mounts. */
+html,
+body {
+  background-color: #152239;
+}
+
+/* Replicates the home "Our Heritage" background — tan texture under a soft white wash. */
+.heritage-bg {
+  position: relative;
+  background-image: url('/tanbackgroundtexture.png');
+  background-size: cover;
+  background-position: center;
+}
+.heritage-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+}
+.heritage-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Load screen — gentle lockup entrance + a light shimmer that sweeps the shield. */
+.load-rise {
+  animation: load-rise 1s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+@keyframes load-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.shield-shimmer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  -webkit-mask: url('/covingtoncasketshield.png') center / contain no-repeat;
+  mask: url('/covingtoncasketshield.png') center / contain no-repeat;
+  background: linear-gradient(110deg, transparent 38%, rgba(255, 255, 255, 0.7) 50%, transparent 62%);
+  background-size: 250% 100%;
+  background-repeat: no-repeat;
+  background-position: 180% 0;
+  mix-blend-mode: screen;
+  animation: shield-shimmer 2.8s ease-in-out 0.9s infinite;
+}
+@keyframes shield-shimmer {
+  0% {
+    background-position: 180% 0;
+  }
+  45%,
+  100% {
+    background-position: -80% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shield-shimmer,
+  .load-rise {
+    animation: none;
+  }
 }
 
 /* Section titles echo the logo's "COVINGTON" wordmark: classical Roman
@@ -54,6 +150,10 @@ h1 span, h2 span, h3 span {
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  border-radius: 0;
+  font-family: "Cinzel", "Playfair Display", serif;
+  font-weight: 600;
+  letter-spacing: 0.12em;
 }
 .btn-swipe::before {
   content: "";
@@ -71,8 +171,33 @@ h1 span, h2 span, h3 span {
 .btn-swipe:focus-visible::before {
   transform: translateX(0) skewX(-12deg);
 }
+/* A decorative diamond in each of the 4 corners. Colour set via --corner. */
+.btn-swipe::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  pointer-events: none;
+  z-index: 1;
+  background-color: var(--corner, #b1a17c);
+  opacity: 0.6;
+  --dmask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5 0 10 5 5 10 0 5Z' fill='%23000'/%3E%3C/svg%3E");
+  -webkit-mask-image: var(--dmask), var(--dmask), var(--dmask), var(--dmask);
+  mask-image: var(--dmask), var(--dmask), var(--dmask), var(--dmask);
+  -webkit-mask-position: left top, right top, left bottom, right bottom;
+  mask-position: left top, right top, left bottom, right bottom;
+  -webkit-mask-size: 8px 8px;
+  mask-size: 8px 8px;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  transition: inset 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-swipe:hover::after,
+.btn-swipe:focus-visible::after {
+  inset: 4px;
+}
 @media (prefers-reduced-motion: reduce) {
-  .btn-swipe::before {
+  .btn-swipe::before,
+  .btn-swipe::after {
     transition-duration: 0.01ms;
   }
 }
