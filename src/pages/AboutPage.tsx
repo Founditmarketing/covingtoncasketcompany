@@ -31,25 +31,21 @@ export default function AboutPage({ navigate }: PageProps) {
         </div>
       </section>
 
-      {/* Welcome + owner portrait */}
+      {/* Welcome + owner signature */}
       <section className="heritage-bg text-[#152239] py-20 lg:py-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="card-frame relative p-2 bg-white border border-[#152239]/10 order-2 lg:order-1">
-            <img src="/about/alan-williamson.png" alt="Alan A. Williamson, owner of Covington Casket" loading="lazy" decoding="async" className="w-full h-auto" />
-          </div>
-          <div className="order-1 lg:order-2">
-            <span className="text-[#b1a17c] font-sans uppercase tracking-[0.4em] text-[10px] mb-4 flex items-center gap-2">
-              <span className="h-px w-6 bg-[#b1a17c]" /> Thank You for Visiting
-            </span>
-            <h2 className="text-3xl md:text-4xl font-light mb-6">A Hometown Legacy</h2>
-            <p className="font-sans text-[#152239]/75 text-sm md:text-base leading-relaxed mb-5">
-              It is an honor to have you visit us. Since 1924, families across the Southeast have made us a part of their story. We are only able to do what we do because of professional, compassionate funeral directors who believe in Covington Casket — and the third generation of our Williamson family is now serving current, and often third-generation, funeral directors.
-            </p>
-            <blockquote className="font-serif italic text-[#b1a17c] text-xl md:text-2xl leading-snug mb-2">
-              “To think — it all started with a pack of Lance crackers.”
-            </blockquote>
-            <p className="font-sans text-[#152239]/55 text-xs uppercase tracking-widest">— Alan A. Williamson, Owner</p>
-          </div>
+        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
+          <span className="text-[#b1a17c] font-sans uppercase tracking-[0.4em] text-[10px] mb-4 flex items-center justify-center gap-3">
+            <span className="h-px w-8 bg-[#b1a17c]/60" /> Thank You for Visiting <span className="h-px w-8 bg-[#b1a17c]/60" />
+          </span>
+          <h2 className="text-3xl md:text-4xl font-light mb-6">A Hometown Legacy</h2>
+          <p className="font-sans text-[#152239]/75 text-sm md:text-base leading-relaxed mb-6">
+            It is an honor to have you visit us. Since 1924, families across the Southeast have made us a part of their story. We are only able to do what we do because of professional, compassionate funeral directors who believe in Covington Casket — and the third generation of our Williamson family is now serving current, and often third-generation, funeral directors.
+          </p>
+          <blockquote className="font-serif italic text-[#b1a17c] text-xl md:text-2xl leading-snug mb-7">
+            “To think — it all started with a pack of Lance crackers.”
+          </blockquote>
+          <img src="/covington%20signature.png" alt="Alan A. Williamson signature" loading="lazy" decoding="async" className="mx-auto h-16 md:h-20 w-auto object-contain" />
+          <p className="font-sans text-[#152239]/55 text-xs uppercase tracking-widest mt-1">Alan A. Williamson, Owner</p>
         </div>
       </section>
 
