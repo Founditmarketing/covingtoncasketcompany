@@ -208,6 +208,13 @@ export default function CasketShowcase({ navigate }: { navigate: (to: string) =>
         </button>
       </div>
 
+      {/* View all — mobile only (desktop has the catalog link in the header) */}
+      <div className="md:hidden flex justify-center mt-10 px-4 relative z-10">
+        <button onClick={() => navigate('/caskets')} className="btn-swipe bg-[#d21243] text-white [--btn-swipe:#152239] px-8 py-4 text-xs font-bold font-sans uppercase tracking-widest flex items-center justify-center">
+          View All Caskets
+        </button>
+      </div>
+
     </section>
   );
 }

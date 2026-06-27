@@ -83,7 +83,7 @@ body {
    can never render as a box (the masked approach broke on iOS Safari). The
    base drop-shadow is the shield's normal resting shadow. */
 .shield-glint {
-  filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.5));
+  filter: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .shield-glint,
