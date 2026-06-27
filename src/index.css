@@ -79,14 +79,7 @@ body {
     transform: none;
   }
 }
-/* A single gold glint on the shield. No overlay element and no mask, so it
-   can never render as a box (the masked approach broke on iOS Safari). The
-   base drop-shadow is the shield's normal resting shadow. */
-.shield-glint {
-  filter: none;
-}
 @media (prefers-reduced-motion: reduce) {
-  .shield-glint,
   .load-rise {
     animation: none;
   }

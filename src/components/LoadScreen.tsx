@@ -18,14 +18,14 @@ export default function LoadScreen({ fading }: Props) {
       />
 
       <div className="relative flex flex-col items-center px-6">
-        {/* Shield with shimmer — fades in first */}
-        <div className="load-rise relative w-24 md:w-32" style={{ animationDelay: '0.1s' }}>
+        {/* Shield — plain transparent PNG, no filter/shadow/mask so it can never
+            render a box behind it on iOS Safari. */}
+        <div className="load-rise w-24 md:w-32" style={{ animationDelay: '0.1s' }}>
           <img
             src="/covingtoncasketshield.png"
             alt="Covington Casket Company"
-            className="block w-full h-auto drop-shadow-[0_10px_35px_rgba(0,0,0,0.55)]"
+            className="block w-full h-auto"
           />
-          <span className="shield-shimmer" aria-hidden="true" />
         </div>
 
         {/* Wordmark — fades in after the shield */}
